@@ -4,6 +4,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:test_project/HomeScreen.dart';
 import 'package:test_project/RealEstateScreen.dart';
+import 'CheckBoxSelectionExampleScreen.dart';
+import 'CustomCameraScreen.dart';
+import 'DatePickerExampleScreen.dart';
+import 'DropDownUsingExpansionTileExample.dart';
+import 'HorizontalCircleScrollExampleScreen.dart';
+import 'RazorPayExampleScreen.dart';
 import 'RowCircleItems.dart';
 import 'controller/MainScreenController.dart';
 
@@ -20,14 +26,59 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: MyGridView(),
+      // home: MyHomePage(
+      //   title: 'Razor Pay',
+      // ),
+      home: ExpansionTileExampleScreen(),
     );
   }
 }
+
+// class ContainerWithDynamicColumn extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Padding(
+//         padding: const EdgeInsets.all(8.0),
+//         child: Card(
+//           color: Colors.green,
+//           child: Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(
+//                   'Container with Dynamic Height Column',
+//                   style: TextStyle(
+//                     fontSize: 20,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 SizedBox(height: 10),
+//                 Container(
+//                   color: Colors.green.shade70 0,
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Text('Item 1', style: TextStyle(fontSize: 18)),
+//                       Text('Item 2', style: TextStyle(fontSize: 18)),
+//                       Text('Item 3', style: TextStyle(fontSize: 18)),
+//                       Text('Item 1', style: TextStyle(fontSize: 18)),
+//                       Text('Item 2', style: TextStyle(fontSize: 18)),
+//                       Text('Item 3', style: TextStyle(fontSize: 18)),
+//                       // Add more items as needed
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class MyGridView extends StatelessWidget {
   final MainScreenController controller =

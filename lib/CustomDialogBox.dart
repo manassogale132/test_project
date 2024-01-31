@@ -37,13 +37,13 @@ class CustomDialogBox extends StatelessWidget {
         shape: BoxShape.rectangle,
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black,
-            offset: Offset(0, 1),
-            blurRadius: 10,
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.black,
+        //     offset: Offset(0, 1),
+        //     blurRadius: 10,
+        //   ),
+        // ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
