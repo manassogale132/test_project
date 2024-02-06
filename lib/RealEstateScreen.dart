@@ -52,7 +52,11 @@ class _RealEstateState extends State<RealEstate> {
     return products;
   }
 
-  // void addProductsToCart(int index) {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {});
+  } // void addProductsToCart(int index) {
   //   selectedProducts.add(index as Products);
   //   var snackBar = SnackBar(
   //     content: Text('Selected Products length - ${selectedProducts.length}'),

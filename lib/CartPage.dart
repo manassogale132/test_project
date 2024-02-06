@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'model/Products.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   final List<Product> selectedProducts;
 
   const CartPage({super.key, required this.selectedProducts});
 
+  @override
+  State<CartPage> createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,38 +35,45 @@ class CartPage extends StatelessWidget {
           ),
         ),
       ),
-      body: selectedProducts.length > 0
+      body: widget.selectedProducts.length > 0
           ? ListView.builder(
-              itemCount: selectedProducts.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(selectedProducts[index].title),
-                  subtitle: Text(selectedProducts[index].description),
-                  leading: CachedNetworkImage(
-                    height: 40,
-                    width: 40,
-                    // imageUrl: snapshot.data![index].thumbnailUrl,
-                    imageUrl: selectedProducts[index].images[0],
-                    imageBuilder: (context, imageProvider) => Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black12,
-                        borderRadius: BorderRadius.circular(30.0),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+        itemCount: widget.selectedProducts.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                widget.selectedProducts.removeAt(index);
+              });
+            },
+            child: ListTile(
+              title: Text(widget.selectedProducts[index].title),
+              subtitle: Text(widget.selectedProducts[index].description),
+              leading: CachedNetworkImage(
+                height: 40,
+                width: 40,
+                // imageUrl: snapshot.data![index].thumbnailUrl,
+                imageUrl: widget.selectedProducts[index].images[0],
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black12,
+                    borderRadius: BorderRadius.circular(30.0),
+                    image: DecorationImage(
+                      image: imageProvider,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                );
-              },
-            )
-          : Center(
-              child: Text(
-                "Cart is Empty!!!",
-                style: TextStyle(fontSize: 22),
+                ),
               ),
             ),
+          );
+        },
+      )
+          : Center(
+        child: Text(
+          "Cart is Empty!!!",
+          style: TextStyle(fontSize: 22),
+        ),
+      ),
     );
   }
 }

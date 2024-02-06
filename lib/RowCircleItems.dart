@@ -1,3 +1,4 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -125,7 +126,7 @@ class _StackedCircleAvatarsWithCountState
                       'TitLorem ipsum may be used as a placeholder before final copy is available.',
                     ),
                     title: Text(
-                      'Title',
+                      '#User${index + 1}',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
@@ -162,18 +163,35 @@ class _StackedCircleAvatarsWithCountState
         ),
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 6),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              controller.selectedImages.isEmpty
-                  ? Expanded(
-                      child: Text(
-                        "Select item dropdown",
+          child: controller.selectedImages.isEmpty
+              ? Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Select items",
                       ),
-                    )
-                  : Expanded(
+                      SizedBox(
+                        width: 5,
+                      ),
+                      controller.isCategoriesDrawerOpen.value
+                          ? Icon(
+                              Icons.arrow_upward,
+                              size: 18,
+                            )
+                          : Icon(
+                              Icons.arrow_downward,
+                              size: 18,
+                            ),
+                    ],
+                  ),
+                )
+              : Row(
+                  children: [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: controller.selectedImages.length > 4
@@ -217,15 +235,51 @@ class _StackedCircleAvatarsWithCountState
                         },
                       ),
                     ),
-              Icon(
-                Icons.arrow_drop_down_circle,
-                color: Colors.black,
-              ),
-              SizedBox(
-                width: 14,
-              ),
-            ],
-          ),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    //   child: DottedLine(
+                    //     direction: Axis.vertical,
+                    //   ),
+                    // ),
+                    Expanded(
+                      flex: 2,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: controller.selectedImages.length > 4
+                            ? 5
+                            : controller.selectedImages.length,
+                        itemBuilder: (context, index) {
+                          if (index < 4) {
+                            return Center(
+                              child: Text(
+                                "#User${index + 1},",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            );
+                          } else {
+                            return Center(
+                              child: Text(
+                                "...",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    // Icon(
+                    //   Icons.arrow_drop_down_circle,
+                    //   color: Colors.black,
+                    // ),
+                    SizedBox(
+                      width: 14,
+                    ),
+                  ],
+                ),
         ),
       ),
     );

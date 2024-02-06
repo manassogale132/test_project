@@ -2,19 +2,35 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_project/HomeScreen.dart';
 import 'package:test_project/RealEstateScreen.dart';
+import 'ApiFetchGetxStateManagementScreen.dart';
 import 'CheckBoxSelectionExampleScreen.dart';
 import 'CustomCameraScreen.dart';
 import 'DatePickerExampleScreen.dart';
 import 'DropDownUsingExpansionTileExample.dart';
 import 'HorizontalCircleScrollExampleScreen.dart';
+import 'HorizontalCircleScrollExampleScreenTwo.dart';
+import 'LoginTokenExampleScreen.dart';
+import 'PaginationAtLocalScreenExample.dart';
 import 'RazorPayExampleScreen.dart';
 import 'RowCircleItems.dart';
 import 'controller/MainScreenController.dart';
 
-void main() {
-  runApp(const MyApp());
+// void main() {
+//   runApp(const MyApp());
+// }
+
+String jwt = "";
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  jwt = await prefs.getString("token") ?? "";
+  print('jwt token--- ${jwt}');
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +45,8 @@ class MyApp extends StatelessWidget {
       // home: MyHomePage(
       //   title: 'Razor Pay',
       // ),
-      home: ExpansionTileExampleScreen(),
+      //home: jwt != null && jwt != '' ? HomeScreen() : LoginPage(),
+      home: PaginationAtLocalScreen(),
     );
   }
 }

@@ -4,25 +4,31 @@ import 'package:get/get.dart';
 
 //**Using PageViewBuilder
 
-class CircleAvatarListPageScreen extends StatefulWidget {
-
+class CircleAvatarListPageScreenTwo extends StatefulWidget {
   @override
-  State<CircleAvatarListPageScreen> createState() =>
-      _CircleAvatarListPageScreenState();
+  State<CircleAvatarListPageScreenTwo> createState() =>
+      _CircleAvatarListPageScreenTwoState();
 }
 
-class _CircleAvatarListPageScreenState
-    extends State<CircleAvatarListPageScreen> {
+class _CircleAvatarListPageScreenTwoState
+    extends State<CircleAvatarListPageScreenTwo> {
   int _selectedIndex = 0;
   bool _isChecked = false;
   Color color = Colors.red;
   String imageString = "";
 
-  final PageController _pageController = PageController(
-    initialPage: 0,
-    viewportFraction:
-    0.25, // Adjust this value to change the size of the CircleAvatars
-  );
+  final List<String> imagesList = [
+    "https://images.unsplash.com/photo-1682685796444-acc2f5c1b7b6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8",
+    "https://plus.unsplash.com/premium_photo-1706571989393-f35be42b509b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
+    "https://images.unsplash.com/photo-1682687982502-1529b3b33f85?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
+    "https://images.unsplash.com/photo-1706402500309-597ba87c8f3a?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1682687218608-5e2522b04673?q=80&w=2875&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1706200234292-66928ea63168?q=80&w=2582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://plus.unsplash.com/premium_photo-1697778137575-e739b2591416?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1706059925993-42795fd8eef9?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1706474066514-730d8a3cf344?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1682687982134-2ac563b2228b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +36,7 @@ class _CircleAvatarListPageScreenState
       //backgroundColor: color,
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: BackButton(color: Colors.white),
+        leading: const BackButton(color: Colors.white),
         centerTitle: true,
         actions: [
           Transform.scale(
@@ -40,9 +46,9 @@ class _CircleAvatarListPageScreenState
               side: MaterialStateBorderSide.resolveWith(
                 (states) {
                   if (states.contains(MaterialState.selected)) {
-                    return BorderSide(color: Colors.white);
+                    return const BorderSide(color: Colors.white);
                   } else {
-                    return BorderSide(color: Colors.black87);
+                    return const BorderSide(color: Colors.black87);
                   }
                 },
               ),
@@ -65,7 +71,7 @@ class _CircleAvatarListPageScreenState
             ),
           ),
         ],
-        title: Text(
+        title: const Text(
           "Images",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -103,16 +109,16 @@ class _CircleAvatarListPageScreenState
                 ),
               ),
             ),
-            placeholder: (context, url) => Center(
+            placeholder: (context, url) => const Center(
               child: CircularProgressIndicator(
                 strokeWidth: 5,
               ),
             ),
-            errorWidget: (context, url, error) => Center(
+            errorWidget: (context, url, error) => const Center(
               child: Icon(Icons.error),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
@@ -122,31 +128,21 @@ class _CircleAvatarListPageScreenState
               child: SizedBox(
                 height: 80, // Height of the circle avatars
                 child: CircleAvatarList(
-                  callback: (index) {
-                    setState(() {
-                      _selectedIndex = index;
-                    });
-                  },
-                  color: (Color value) {
-                    setState(() {
-                      color = value;
-                    });
-                  },
+                  images: imagesList,
                   image: (String value) {
                     setState(() {
                       imageString = value;
                     });
                   },
-                  pageController: _pageController,
                 ),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 160.0),
+          const Padding(
+            padding: EdgeInsets.only(bottom: 160.0),
             child: Align(
               alignment: Alignment.bottomCenter,
               child: Row(
@@ -186,17 +182,13 @@ class _CircleAvatarListPageScreenState
 }
 
 class CircleAvatarList extends StatefulWidget {
-  final ValueChanged<int> callback;
-  final ValueChanged<Color> color;
   final ValueChanged<String> image;
-  final PageController pageController;
+  final List<String> images;
 
   const CircleAvatarList({
     super.key,
-    required this.callback,
-    required this.color,
+    required this.images,
     required this.image,
-    required this.pageController,
   });
 
   @override
@@ -204,89 +196,51 @@ class CircleAvatarList extends StatefulWidget {
 }
 
 class _CircleAvatarListState extends State<CircleAvatarList> {
-  // final List<Color> colorsList = [
-  //   Colors.red,
-  //   Colors.blue,
-  //   Colors.yellow,
-  //   Colors.green,
-  //   Colors.orangeAccent,
-  //   Colors.purple,
-  //   Colors.pinkAccent,
-  //   Colors.cyan,
-  //   Colors.lime,
-  //   Colors.brown
-  // ];
-
-  final List<Color> colorsList = [
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white,
-    Colors.white
-  ];
-
-  final List<String> imagesList = [
-    "https://images.unsplash.com/photo-1682685796444-acc2f5c1b7b6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8",
-    "https://plus.unsplash.com/premium_photo-1706571989393-f35be42b509b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1682687982502-1529b3b33f85?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8",
-    "https://images.unsplash.com/photo-1706402500309-597ba87c8f3a?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1682687218608-5e2522b04673?q=80&w=2875&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1706200234292-66928ea63168?q=80&w=2582&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://plus.unsplash.com/premium_photo-1697778137575-e739b2591416?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1706059925993-42795fd8eef9?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1706474066514-730d8a3cf344?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "https://images.unsplash.com/photo-1682687982134-2ac563b2228b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-  ];
+  late PageController _pageController;
 
   @override
-  Widget build(BuildContext context) {
-    return PageView.builder(
-      controller: widget.pageController,
-      //itemCount: colorsList.length, // Number of items
-      itemCount: imagesList.length, // Number of items
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          // onTap: () {
-          //   widget.callback(index + 1);
-          //   widget.color(colorsList[index]);
-          // },
-          child: CircleAvatarItem(
-            colors: colorsList,
-            index: index,
-            pageController: widget.pageController,
-          ),
-        );
-      },
-      onPageChanged: (int index) {
-        // widget.callback(index + 1);
-        widget.color(colorsList[index]);
-        widget.image(imagesList[index]);
-        // Handle page change if needed
-      },
-    );
+  void initState() {
+    super.initState();
+    _pageController = PageController(
+        initialPage: 0,
+        viewportFraction:
+            0.25); // Adjust this value to change the size of the CircleAvatars);
   }
 
   @override
   void dispose() {
-    widget.pageController.dispose();
+    _pageController.dispose();
     super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+      controller: _pageController,
+      //itemCount: colorsList.length, // Number of items
+      itemCount: widget.images.length, // Number of items
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          child: CircleAvatarItem(
+            index: index,
+            pageController: _pageController,
+          ),
+        );
+      },
+      onPageChanged: (int index) {
+        widget.image(widget.images[index]);
+      },
+    );
   }
 }
 
 class CircleAvatarItem extends StatelessWidget {
   final int index;
   final PageController pageController;
-  final List<Color> colors;
 
   const CircleAvatarItem({
     required this.index,
     required this.pageController,
-    required this.colors,
   });
 
   @override
@@ -294,8 +248,8 @@ class CircleAvatarItem extends StatelessWidget {
     return AnimatedBuilder(
       animation: pageController,
       builder: (context, child) {
-        double value = 1;
-        if (pageController.position.haveDimensions) {
+        double value = 0;
+        if (pageController.position.hasPixels) {
           value = (pageController.page ?? 0) - index;
           value = (1 - (value.abs() * 0.4)).clamp(0.0, 1.0);
         }
@@ -312,11 +266,12 @@ class CircleAvatarItem extends StatelessWidget {
         radius: 30, // Radius of the CircleAvatar
         //backgroundColor: colors[index], // Example background color
         backgroundColor:
-            pageController.page!.round() == index ? Colors.white : Colors.grey,
+            pageController.page?.round() == index ? Colors.white : Colors.grey,
         // Example background color
         child: Text(
           (index + 1).toString(), // Example text inside CircleAvatar
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style:
+              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
       ),
     );
