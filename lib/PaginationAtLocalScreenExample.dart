@@ -20,7 +20,7 @@ class _PaginationAtLocalScreenState extends State<PaginationAtLocalScreen> {
   bool _loading = false;
 
   List<Post> postDataTwo = [];
-  int _visibleItemCountTwo = 6;
+  int _visibleItemCountTwo = 3;
   int _startIndexTwo = 0;
   bool _loadingTwo = false;
 
@@ -233,49 +233,104 @@ class _PaginationAtLocalScreenState extends State<PaginationAtLocalScreen> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: DottedLine(),
             ),
-            postData.isNotEmpty && !_loading
-                ? Container(
-              height: 250,
-              child: ListView.builder(
-                itemCount: postData.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(postData[index].title),
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.yellow,
-                      child: Text(
-                        postData[index].id.toString(),
-                        style:
-                        TextStyle(fontSize: 18, color: Colors.white),
+            Container(
+              color: Colors.grey.shade200,
+              child: Column(
+                children: postDataTwo.isNotEmpty && !_loadingTwo
+                    ? List.generate(
+                        postDataTwo.length,
+                        (index) => ListTile(
+                          title: Text(postDataTwo[index].title),
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.greenAccent,
+                            child: Text(
+                              postDataTwo[index].id.toString(),
+                              style: TextStyle(fontSize: 18, color: Colors.black),
+                            ),
+                          ),
+                          subtitle: Text(
+                            postDataTwo[index].url,
+                          ),
+                          trailing: Text(
+                            "${index}",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                      )
+                    : List.generate(
+                        postDataTwo.length,
+                        (index) => Shimmer.fromColors(
+                          baseColor: Colors.grey[400]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: ListTile(
+                            title: Text(postDataTwo[index].title),
+                            leading: CircleAvatar(
+                              backgroundColor: Colors.greenAccent,
+                              child: Text(
+                                postDataTwo[index].id.toString(),
+                                style:
+                                    TextStyle(fontSize: 18, color: Colors.black),
+                              ),
+                            ),
+                            subtitle: Text(
+                              postDataTwo[index].url,
+                            ),
+                            trailing: Text(
+                              "${index}",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    subtitle: Text(
-                      postData[index].url,
-                    ),
-                    trailing: Text(
-                      "${index}",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  );
-                },
               ),
-            )
-                : Shimmer.fromColors(
-              baseColor: Colors.grey[400]!,
-              highlightColor: Colors.grey[100]!,
-              child: Container(
-                height: 250,
-                child: ListView.builder(
-                  itemCount: _visibleItemCount,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text('Loading'),
-                      subtitle: Text('Loading'),
-                      leading: CircleAvatar(),
-                    );
-                  },
-                ),
-              ),
+            ),
+            // postData.isNotEmpty && !_loading
+            //     ? Container(
+            //   height: 250,
+            //   child: ListView.builder(
+            //     itemCount: postData.length,
+            //     itemBuilder: (context, index) {
+            //       return ListTile(
+            //         title: Text(postData[index].title),
+            //         leading: CircleAvatar(
+            //           backgroundColor: Colors.yellow,
+            //           child: Text(
+            //             postData[index].id.toString(),
+            //             style:
+            //             TextStyle(fontSize: 18, color: Colors.white),
+            //           ),
+            //         ),
+            //         subtitle: Text(
+            //           postData[index].url,
+            //         ),
+            //         trailing: Text(
+            //           "${index}",
+            //           style: TextStyle(fontSize: 18),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // )
+            //     : Shimmer.fromColors(
+            //   baseColor: Colors.grey[400]!,
+            //   highlightColor: Colors.grey[100]!,
+            //   child: Container(
+            //     height: 250,
+            //     child: ListView.builder(
+            //       itemCount: _visibleItemCount,
+            //       itemBuilder: (context, index) {
+            //         return ListTile(
+            //           title: Text('Loading'),
+            //           subtitle: Text('Loading'),
+            //           leading: CircleAvatar(),
+            //         );
+            //       },
+            //     ),
+            //   ),
+            // ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: DottedLine(),
             ),
           ],
         ),

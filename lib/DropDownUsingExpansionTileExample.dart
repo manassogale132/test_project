@@ -84,40 +84,78 @@ class _ExpansionTileExampleScreenState
               SizedBox(
                 height: 10,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(14),
-                  // Adjust the value as needed
-                  border: Border.all(
-                    color: Colors.black54, // Set border color here
-                    width: 0.5, // Set border width here
-                  ),
-                ),
-                child: new ExpansionTile(
-                  shape: RoundedRectangleBorder(
-                    side: new BorderSide(color: Colors.grey.shade400),
-                    borderRadius: new BorderRadius.all(
-                      new Radius.circular(14),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    // Adjust the value as needed
+                    border: Border.all(
+                      color: Colors.black54, // Set border color here
+                      width: 0.5, // Set border width here
                     ),
                   ),
-                  key: new Key(
-                    _key.toString(),
-                  ),
-                  initiallyExpanded: false,
-                  title: new Text(
-                    this.foos,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  backgroundColor: Colors.white,
-                  children: List.generate(
-                    dropDownList.length,
-                    (index) {
-                      if (index == dropDownList.length - 1) {
+                  child: ExpansionTile(
+                    leading: Icon(
+                      Icons.money,
+                      size: 24.0,
+                      color: Colors.green,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      side: new BorderSide(color: Colors.grey.shade400),
+                      borderRadius: new BorderRadius.all(
+                        new Radius.circular(8),
+                      ),
+                    ),
+                    key: new Key(
+                      _key.toString(),
+                    ),
+                    initiallyExpanded: false,
+                    title: new Text(
+                      this.foos,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    backgroundColor: Colors.white,
+                    children: List.generate(
+                      dropDownList.length,
+                      (index) {
+                        if (index == dropDownList.length - 1) {
+                          return Container(
+                            padding: EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade50,
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8.0),
+                                bottomRight: Radius.circular(8.0),
+                              ),
+                            ),
+                            child: new ListTile(
+                              leading: Icon(
+                                Icons.money,
+                                size: 24.0,
+                                color: Colors.green,
+                              ),
+                              tileColor: Colors.white,
+                              title: Text(dropDownList[index]),
+                              onTap: () {
+                                setState(() {
+                                  this.foos = dropDownList[index].toString();
+                                  _collapse();
+                                });
+                              },
+                            ),
+                          );
+                        }
                         return Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          color: Colors.white,
+                          color: Colors.grey.shade50,
                           child: new ListTile(
+                            leading: Icon(
+                              Icons.money,
+                              size: 24.0,
+                              color: Colors.green,
+                            ),
                             tileColor: Colors.white,
                             title: Text(dropDownList[index]),
                             onTap: () {
@@ -128,63 +166,50 @@ class _ExpansionTileExampleScreenState
                             },
                           ),
                         );
-                      }
-                      return Container(
-                        color: Colors.white,
-                        child: new ListTile(
-                          tileColor: Colors.white,
-                          title: Text(dropDownList[index]),
-                          onTap: () {
-                            setState(() {
-                              this.foos = dropDownList[index].toString();
-                              _collapse();
-                            });
-                          },
-                        ),
-                      );
-                    },
-                  ),
+                      },
+                    ),
 
-                  // [
-                  //   Container(
-                  //     color: Colors.white,
-                  //     child: new ListTile(
-                  //       tileColor: Colors.white,
-                  //       title: const Text('One'),
-                  //       onTap: () {
-                  //         setState(() {
-                  //           this.foos = 'One';
-                  //           _collapse();
-                  //         });
-                  //       },
-                  //     ),
-                  //   ),
-                  //   Container(
-                  //     color: Colors.white,
-                  //     child: new ListTile(
-                  //       title: const Text('Two'),
-                  //       onTap: () {
-                  //         setState(() {
-                  //           this.foos = 'Two';
-                  //           _collapse();
-                  //         });
-                  //       },
-                  //     ),
-                  //   ),
-                  //   Container(
-                  //     color: Colors.white,
-                  //     child: new ListTile(
-                  //       title: const Text('Three'),
-                  //       onTap: () {
-                  //         setState(() {
-                  //           this.foos = 'Three';
-                  //           _collapse();
-                  //         });
-                  //       },
-                  //     ),
-                  //   ),
-                  //   SizedBox(height: 10,),
-                  // ],
+                    // [
+                    //   Container(
+                    //     color: Colors.white,
+                    //     child: new ListTile(
+                    //       tileColor: Colors.white,
+                    //       title: const Text('One'),
+                    //       onTap: () {
+                    //         setState(() {
+                    //           this.foos = 'One';
+                    //           _collapse();
+                    //         });
+                    //       },
+                    //     ),
+                    //   ),
+                    //   Container(
+                    //     color: Colors.white,
+                    //     child: new ListTile(
+                    //       title: const Text('Two'),
+                    //       onTap: () {
+                    //         setState(() {
+                    //           this.foos = 'Two';
+                    //           _collapse();
+                    //         });
+                    //       },
+                    //     ),
+                    //   ),
+                    //   Container(
+                    //     color: Colors.white,
+                    //     child: new ListTile(
+                    //       title: const Text('Three'),
+                    //       onTap: () {
+                    //         setState(() {
+                    //           this.foos = 'Three';
+                    //           _collapse();
+                    //         });
+                    //       },
+                    //     ),
+                    //   ),
+                    //   SizedBox(height: 10,),
+                    // ],
+                  ),
                 ),
               ),
               SizedBox(

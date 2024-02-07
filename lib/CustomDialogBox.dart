@@ -56,10 +56,37 @@ class CustomDialogBox extends StatelessWidget {
             ),
           ),
           SizedBox(height: 25),
-          Text(
-            subTitle,
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14),
+          Image.network(
+            'https://web-strapi.mrmilu.com/uploads/flutter_logo_470e9f7491.png',
+            // URL of the image
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+            height: 90,
+            width: 90,
+            errorBuilder: (BuildContext context, Object exception,
+                StackTrace? stackTrace) {
+              return Text(
+                  'Image not found'); // Placeholder or error message widget
+            },
+          ),
+          SizedBox(height: 25),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              subTitle,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 14),
+            ),
           ),
           SizedBox(height: 20),
           Row(

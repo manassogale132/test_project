@@ -25,8 +25,6 @@ class MainScreenController extends GetxController {
 
   var itemsUsersSelected = List.generate(10, (index) => false).obs;
 
-  var selectedProducts = <String>[].obs;
-
   void addOrRemoveelectedImages(int index) {
     if (!selectedImages.contains(images[index])) {
       selectedImages.add(images[index]);

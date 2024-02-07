@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ import 'DropDownUsingExpansionTileExample.dart';
 import 'HorizontalCircleScrollExampleScreen.dart';
 import 'HorizontalCircleScrollExampleScreenTwo.dart';
 import 'LoginTokenExampleScreen.dart';
+import 'NeomorphicDesigneExample.dart';
 import 'PaginationAtLocalScreenExample.dart';
 import 'RazorPayExampleScreen.dart';
 import 'RowCircleItems.dart';
@@ -182,15 +185,20 @@ class MyGridView extends StatelessWidget {
                                     : Colors.black54,
                               ),
                             ),
-                            title: Text(
-                              "John Doe #${index}",
-                              style: TextStyle(
-                                  color: controller.itemsUsersSelected[index]
-                                      ? Colors.white
-                                      : Colors.black54),
+                            title: Padding(
+                              padding: const EdgeInsets.only(bottom: 10.0),
+                              child: Text(
+                                "John Doe #${index}",
+                                style: TextStyle(
+                                    color: controller.itemsUsersSelected[index]
+                                        ? Colors.white
+                                        : Colors.black54,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                             subtitle: Text(
-                              "Software Engineer",
+                              "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
                               style: TextStyle(
                                   color: controller.itemsUsersSelected[index]
                                       ? Colors.white
