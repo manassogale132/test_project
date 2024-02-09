@@ -12,6 +12,8 @@ import 'CheckBoxSelectionExampleScreen.dart';
 import 'CustomCameraScreen.dart';
 import 'DatePickerExampleScreen.dart';
 import 'DropDownUsingExpansionTileExample.dart';
+import 'EditTextSearchExampleScreen.dart';
+import 'GetWidgetsLibExample.dart';
 import 'HorizontalCircleScrollExampleScreen.dart';
 import 'HorizontalCircleScrollExampleScreenTwo.dart';
 import 'LoginTokenExampleScreen.dart';
@@ -19,6 +21,7 @@ import 'NeomorphicDesigneExample.dart';
 import 'PaginationAtLocalScreenExample.dart';
 import 'RazorPayExampleScreen.dart';
 import 'RowCircleItems.dart';
+import 'TwoEditTextSearchExampleScreen.dart';
 import 'controller/MainScreenController.dart';
 
 // void main() {
@@ -49,7 +52,7 @@ class MyApp extends StatelessWidget {
       //   title: 'Razor Pay',
       // ),
       //home: jwt != null && jwt != '' ? HomeScreen() : LoginPage(),
-      home: PaginationAtLocalScreen(),
+      home: ExpansionTileExampleScreen(),
     );
   }
 }

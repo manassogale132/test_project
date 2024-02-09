@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:intl/intl.dart';
 import 'package:linear_progress_bar/linear_progress_bar.dart';
+import 'package:test_project/LinearProgresBar.dart';
 
 class ExpansionTileExampleScreen extends StatefulWidget {
   const ExpansionTileExampleScreen({super.key});
@@ -43,7 +44,7 @@ class _ExpansionTileExampleScreenState
     _collapse();
   }
 
-  List<String> dropDownList = ["One", "Two", "Three"];
+  List<String> dropDownList = ["One", "Two", "Three", "Four"];
 
   DateTime _startDateDynamicRange = DateTime.now();
   DateTime _endDateDynamicRange = DateTime.now().add(Duration(days: 7));
@@ -113,58 +114,75 @@ class _ExpansionTileExampleScreenState
                     initiallyExpanded: false,
                     title: new Text(
                       this.foos,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                     ),
-                    backgroundColor: Colors.white,
                     children: List.generate(
                       dropDownList.length,
                       (index) {
-                        if (index == dropDownList.length - 1) {
-                          return Container(
-                            padding: EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade50,
-                              borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(8.0),
-                                bottomRight: Radius.circular(8.0),
+                        return Column(
+                          children: [
+                            index == 0
+                                ? Transform.translate(
+                                    offset: Offset(0, -7),
+                                    child: Divider(
+                                      thickness:
+                                          1, // Set divider thickness as needed
+                                      color: Colors
+                                          .grey, // Set divider color as needed
+                                    ),
+                                  )
+                                : Container(),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: index == dropDownList.length - 1
+                                    ? BorderRadius.only(
+                                        bottomLeft: Radius.circular(8.0),
+                                        bottomRight: Radius.circular(8.0),
+                                      )
+                                    : null,
                               ),
-                            ),
-                            child: new ListTile(
-                              leading: Icon(
-                                Icons.money,
-                                size: 24.0,
-                                color: Colors.green,
+                              child: InkWell(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.money,
+                                        size: 24.0,
+                                        color: Colors.green,
+                                      ),
+                                      SizedBox(
+                                        width: 16,
+                                      ),
+                                      Text(dropDownList[index]),
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    this.foos = dropDownList[index].toString();
+                                    _collapse();
+                                  });
+                                },
                               ),
-                              tileColor: Colors.white,
-                              title: Text(dropDownList[index]),
-                              onTap: () {
-                                setState(() {
-                                  this.foos = dropDownList[index].toString();
-                                  _collapse();
-                                });
-                              },
+                              // child: new ListTile(
+                              //   leading: Icon(
+                              //     Icons.money,
+                              //     size: 24.0,
+                              //     color: Colors.green,
+                              //   ),
+                              //   title: Text(dropDownList[index]),
+                              //   onTap: () {
+                              //     setState(() {
+                              //       this.foos = dropDownList[index].toString();
+                              //       _collapse();
+                              //     });
+                              //   },
+                              // ),
                             ),
-                          );
-                        }
-                        return Container(
-                          color: Colors.grey.shade50,
-                          child: new ListTile(
-                            leading: Icon(
-                              Icons.money,
-                              size: 24.0,
-                              color: Colors.green,
-                            ),
-                            tileColor: Colors.white,
-                            title: Text(dropDownList[index]),
-                            onTap: () {
-                              setState(() {
-                                this.foos = dropDownList[index].toString();
-                                _collapse();
-                              });
-                            },
-                          ),
+                          ],
                         );
                       },
                     ),
@@ -251,24 +269,45 @@ class _ExpansionTileExampleScreenState
                   Expanded(
                     flex: 10,
                     child: Container(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        child: LinearProgressBar(
-                          maxSteps: 9,
-                          progressType: LinearProgressBar.progressTypeLinear,
-                          currentStep: stepCounter,
-                          progressColor: Colors.green,
-                          backgroundColor: Colors.grey,
-                          // dotsAxis: Axis.horizontal,
-                          // // OR Axis.vertical
-                          // dotsActiveSize: 10,
-                          // dotsInactiveSize: 10,
-                          // dotsSpacing: EdgeInsets.only(right: 10),
-                          // also can use any EdgeInsets.
-                          semanticsLabel: "Label",
-                          semanticsValue: "Value",
-                          minHeight: 18,
-                        ),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            child: LinearProgressBar(
+                              maxSteps: 18,
+                              progressType:
+                                  LinearProgressBar.progressTypeLinear,
+                              currentStep: stepCounter,
+                              progressColor: Colors.green,
+                              backgroundColor: Colors.grey,
+                              minHeight: 18,
+                            ),
+                          ),
+                          Positioned(
+                            left: (MediaQuery.of(context).size.width - 90) *
+                                    (stepCounter / 18) -
+                                16, // Adjusted position
+                            top: -4,
+                            child: Center(
+                              child: Container(
+                                width: 26,
+                                height: 26,
+                                decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  // Or any color you want for the circle
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -279,7 +318,7 @@ class _ExpansionTileExampleScreenState
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          if (stepCounter != 9) {
+                          if (stepCounter != 18) {
                             stepCounter++;
                           }
                         });
@@ -298,6 +337,18 @@ class _ExpansionTileExampleScreenState
               Text(
                 '$stepCounter',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+
+              LinearProgressBarCustom(
+                progress: 1.0, // Progress value (from 0.0 to 1.0)
+                circlePosition:
+                    0.9, // Position where the circle indicator should appear
+              ),
+              SizedBox(height: 20),
+              LinearProgressBarCustom(
+                progress: 0.3, // Progress value (from 0.0 to 1.0)
+                circlePosition:
+                    0.8, // Position where the circle indicator should appear
               ),
               SizedBox(
                 height: 30,
