@@ -24,6 +24,9 @@ class _PaginationAtLocalScreenState extends State<PaginationAtLocalScreen> {
   int _startIndexTwo = 0;
   bool _loadingTwo = false;
 
+  List<dynamic> responseData = [];
+  int pageCount = 0;
+
   Future<List<Post>> fetchPostAPI() async {
     // Fetch data from your API
     var url = 'https://jsonplaceholder.typicode.com/photos';
@@ -57,10 +60,17 @@ class _PaginationAtLocalScreenState extends State<PaginationAtLocalScreen> {
     // Fetch data from your API
     var url = 'https://jsonplaceholder.typicode.com/photos';
     // Simulate API call delay
-    await Future.delayed(Duration(seconds: 2));
+    // await Future.delayed(Duration(seconds: 2));
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      final List<dynamic> responseData = json.decode(response.body);
+      responseData = json.decode(response.body);
+
+      final itemCount = responseData.length;
+      final itemsPerPage = 3;
+
+      pageCount = (itemCount / itemsPerPage).ceil();
+      print('Number of pages: $pageCount');
+
       setState(() {
         if (postDataTwo.isEmpty) {
           postDataTwo = responseData
@@ -181,54 +191,54 @@ class _PaginationAtLocalScreenState extends State<PaginationAtLocalScreen> {
                       ),
                     ),
                   ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: DottedLine(),
-            ),
-            postDataTwo.isNotEmpty && !_loadingTwo
-                ? Container(
-                    height: 250,
-                    child: ListView.builder(
-                      itemCount: postDataTwo.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(postDataTwo[index].title),
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.greenAccent,
-                            child: Text(
-                              postDataTwo[index].id.toString(),
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.black),
-                            ),
-                          ),
-                          subtitle: Text(
-                            postDataTwo[index].url,
-                          ),
-                          trailing: Text(
-                            "${index}",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                : Shimmer.fromColors(
-                    baseColor: Colors.grey[400]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(
-                      height: 250,
-                      child: ListView.builder(
-                        itemCount: _visibleItemCountTwo,
-                        itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text('Loading'),
-                            subtitle: Text('Loading'),
-                            leading: CircleAvatar(),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 8.0),
+            //   child: DottedLine(),
+            // ),
+            // postDataTwo.isNotEmpty && !_loadingTwo
+            //     ? Container(
+            //         height: 250,
+            //         child: ListView.builder(
+            //           itemCount: postDataTwo.length,
+            //           itemBuilder: (context, index) {
+            //             return ListTile(
+            //               title: Text(postDataTwo[index].title),
+            //               leading: CircleAvatar(
+            //                 backgroundColor: Colors.greenAccent,
+            //                 child: Text(
+            //                   postDataTwo[index].id.toString(),
+            //                   style:
+            //                       TextStyle(fontSize: 18, color: Colors.black),
+            //                 ),
+            //               ),
+            //               subtitle: Text(
+            //                 postDataTwo[index].url,
+            //               ),
+            //               trailing: Text(
+            //                 "${index}",
+            //                 style: TextStyle(fontSize: 18),
+            //               ),
+            //             );
+            //           },
+            //         ),
+            //       )
+            //     : Shimmer.fromColors(
+            //         baseColor: Colors.grey[400]!,
+            //         highlightColor: Colors.grey[100]!,
+            //         child: Container(
+            //           height: 250,
+            //           child: ListView.builder(
+            //             itemCount: _visibleItemCountTwo,
+            //             itemBuilder: (context, index) {
+            //               return ListTile(
+            //                 title: Text('Loading'),
+            //                 subtitle: Text('Loading'),
+            //                 leading: CircleAvatar(),
+            //               );
+            //             },
+            //           ),
+            //         ),
+            //       ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: DottedLine(),
@@ -284,6 +294,8 @@ class _PaginationAtLocalScreenState extends State<PaginationAtLocalScreen> {
                       ),
               ),
             ),
+            SizedBox(height: 20,),
+            Text('${pageCount} out of ${responseData.length.toString()}',style: TextStyle(fontSize: 16),),
             // postData.isNotEmpty && !_loading
             //     ? Container(
             //   height: 250,

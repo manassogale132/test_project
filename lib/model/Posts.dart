@@ -4,11 +4,13 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 List<Post> postFromJson(String str) => List<Post>.from(json.decode(str).map((x) => Post.fromJson(x)));
 
 String postToJson(List<Post> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class Post {
+class Post extends Equatable {
   int albumId;
   int id;
   String title;
@@ -38,4 +40,30 @@ class Post {
     "url": url,
     "thumbnailUrl": thumbnailUrl,
   };
+
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      super == other &&
+          other is Post &&
+          runtimeType == other.runtimeType &&
+          albumId == other.albumId &&
+          id == other.id &&
+          title == other.title &&
+          url == other.url &&
+          thumbnailUrl == other.thumbnailUrl;
+
+  @override
+  int get hashCode =>
+      super.hashCode ^
+      albumId.hashCode ^
+      id.hashCode ^
+      title.hashCode ^
+      url.hashCode ^
+      thumbnailUrl.hashCode;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }

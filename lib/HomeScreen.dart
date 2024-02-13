@@ -32,6 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Text('Page 3'),
   ];
 
+  String pagesCount = '100';
+
   final GlobalKey<SliderDrawerState> _sliderDrawerKey =
       GlobalKey<SliderDrawerState>();
 
@@ -65,6 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isUsersDropdownVisible = false;
 
   late SharedPreferences prefs;
+
+  void returnCountFormat(){
+
+  }
 
   Future<void> _loadContent() async {
     prefs = await SharedPreferences.getInstance();
@@ -137,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 22, fontWeight: FontWeight.w700))),
               key: _sliderDrawerKey,
               slider: Container(
+                color: Colors.white,
                 child: Column(
                   children: [
                     DrawerHeader(
@@ -406,7 +413,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
-                color: Colors.white,
               ),
               child: SingleChildScrollView(
                 child: Padding(
@@ -834,7 +840,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Container(
                             height: 35,
-                            width: MediaQuery.of(context).size.width * 0.4,
+                            width: MediaQuery.of(context).size.width * 0.35,
                             decoration: BoxDecoration(
                               color: Colors.grey.shade100,
                               borderRadius: BorderRadius.circular(6),
@@ -855,10 +861,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 4.0),
                                     child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
                                       children: [
                                         Text(
                                           '100',
@@ -882,7 +884,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   flex: 3,
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 8.0),
-                                    child: Text('Page 1 of 1000'),
+                                    child: Text('Page 1 of ${pagesCount}'),
                                   ),
                                 )
                               ],

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test_project/HomeScreen.dart';
 import 'package:test_project/RealEstateScreen.dart';
 import 'ApiFetchGetxStateManagementScreen.dart';
+import 'BottomSheetModalExample.dart';
 import 'CheckBoxSelectionExampleScreen.dart';
 import 'CustomCameraScreen.dart';
 import 'DatePickerExampleScreen.dart';
@@ -21,6 +22,7 @@ import 'NeomorphicDesigneExample.dart';
 import 'PaginationAtLocalScreenExample.dart';
 import 'RazorPayExampleScreen.dart';
 import 'RowCircleItems.dart';
+import 'SyncfusionChartScreenExample.dart';
 import 'TwoEditTextSearchExampleScreen.dart';
 import 'controller/MainScreenController.dart';
 
@@ -52,7 +54,7 @@ class MyApp extends StatelessWidget {
       //   title: 'Razor Pay',
       // ),
       //home: jwt != null && jwt != '' ? HomeScreen() : LoginPage(),
-      home: ExpansionTileExampleScreen(),
+      home: PaginationAtLocalScreen(),
     );
   }
 }
