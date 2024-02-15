@@ -2,85 +2,92 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-class SyncfusionChartScreenExample extends StatelessWidget {
+class SyncfusionChartScreenExample extends StatefulWidget {
+  const SyncfusionChartScreenExample({super.key});
+
+  @override
+  State<SyncfusionChartScreenExample> createState() =>
+      _SyncfusionChartScreenExampleState();
+}
+
+class _SyncfusionChartScreenExampleState
+    extends State<SyncfusionChartScreenExample> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Stacked Column Chart',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Stacked Column Chart'),
-        ),
-        body: Center(
-          child: Container(
-            height: 300,
-            child: _buildStackedColumnChart(),
-          ),
-        ),
-      ),
-    );
-  }
+    final List<ChartData> chartData = [
+      ChartData('China', 20000, 33000, 43000, 10000),
+      ChartData('USA', 13000, 9000, 20000, 38000),
+      ChartData('UK', 42000, 22000, 26000, 37000),
+      ChartData('Brazil', 48000, 38000, 48000, 34000),
+      ChartData('India', 26000, 5000, 35000, 43000)
+    ];
 
-  Widget _buildStackedColumnChart() {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        Container(
-          width: 500, // Set the width of the chart container
+    return Scaffold(
+      body: Center(
+        child: Container(
+          height: 400,
+          padding: EdgeInsets.all(12.0),
           child: SfCartesianChart(
+            legend: Legend(
+              isVisible: true,
+              position: LegendPosition.bottom,
+            ),
             primaryXAxis: CategoryAxis(
-              majorGridLines: MajorGridLines(width: 0), // Hide the major gridlines
-              labelIntersectAction: AxisLabelIntersectAction.rotate45, // Rotate the x-axis labels
+              title: AxisTitle(text: 'Countries'),
+              majorGridLines: MajorGridLines(width: 0),
             ),
             primaryYAxis: NumericAxis(
-              numberFormat: NumberFormat.compact(), // Change the format of y-axis labels
+              title: AxisTitle(text: 'Investments'),
+              minorGridLines: MinorGridLines(width: 0),
+              //numberFormat: NumberFormat.currency(locale: 'en_In', symbol: "₹"),
+              numberFormat: NumberFormat.compact(),
+              maximumLabels: 3,
             ),
-            series: _getStackedColumnSeries(),
+            palette: <Color>[
+              Colors.greenAccent,
+              Colors.pinkAccent,
+              Colors.amberAccent,
+              Colors.blue,
+            ],
+            series: <CartesianSeries>[
+              StackedColumnSeries<ChartData, String>(
+                  dataSource: chartData,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(6),
+                    bottomRight: Radius.circular(6),
+                  ),
+                  xValueMapper: (ChartData data, _) => data.x,
+                  yValueMapper: (ChartData data, _) => data.y1),
+              StackedColumnSeries<ChartData, String>(
+                  dataSource: chartData,
+                  xValueMapper: (ChartData data, _) => data.x,
+                  yValueMapper: (ChartData data, _) => data.y2),
+              StackedColumnSeries<ChartData, String>(
+                  dataSource: chartData,
+                  xValueMapper: (ChartData data, _) => data.x,
+                  yValueMapper: (ChartData data, _) => data.y3),
+              StackedColumnSeries<ChartData, String>(
+                  dataSource: chartData,
+                  // borderRadius: BorderRadius.only(
+                  //   topLeft: Radius.circular(10),
+                  //   topRight: Radius.circular(10),
+                  // ),
+                  xValueMapper: (ChartData data, _) => data.x,
+                  yValueMapper: (ChartData data, _) => data.y4)
+            ],
           ),
         ),
-      ],
+      ),
     );
-  }
-
-  List<StackedColumnSeries<_ChartData, String>> _getStackedColumnSeries() {
-    final List<_ChartData> chartData = [
-      _ChartData('Jan', 80, 10, 20),
-      _ChartData('Feb', 35, 28, 22),
-      _ChartData('Mar', 40, 30, 25),
-      _ChartData('Apr', 38, 32, 27),
-      _ChartData('May', 42, 35, 30),
-      _ChartData('Jun', 48, 40, 35),
-      _ChartData('Jul', 48, 40, 35),
-    ];
-
-    return <StackedColumnSeries<_ChartData, String>>[
-      StackedColumnSeries<_ChartData, String>(
-        dataSource: chartData,
-        xValueMapper: (_ChartData sales, _) => sales.month,
-        yValueMapper: (_ChartData sales, _) => sales.sales1,
-        name: 'Product A',
-      ),
-      StackedColumnSeries<_ChartData, String>(
-        dataSource: chartData,
-        xValueMapper: (_ChartData sales, _) => sales.month,
-        yValueMapper: (_ChartData sales, _) => sales.sales2,
-        name: 'Product B',
-      ),
-      StackedColumnSeries<_ChartData, String>(
-        dataSource: chartData,
-        xValueMapper: (_ChartData sales, _) => sales.month,
-        yValueMapper: (_ChartData sales, _) => sales.sales3,
-        name: 'Product C',
-      ),
-    ];
   }
 }
 
-class _ChartData {
-  _ChartData(this.month, this.sales1, this.sales2, this.sales3);
+class ChartData {
+  ChartData(this.x, this.y1, this.y2, this.y3, this.y4);
 
-  final String month;
-  final double sales1;
-  final double sales2;
-  final double sales3;
+  final String x;
+  final double y1;
+  final double y2;
+  final double y3;
+  final double y4;
 }

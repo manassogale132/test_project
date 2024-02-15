@@ -1,5 +1,7 @@
 //import 'dart:html';
 
+import 'dart:io';
+
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,9 +21,12 @@ import 'HorizontalCircleScrollExampleScreen.dart';
 import 'HorizontalCircleScrollExampleScreenTwo.dart';
 import 'LoginTokenExampleScreen.dart';
 import 'NeomorphicDesigneExample.dart';
+import 'PageViewTabExample.dart';
 import 'PaginationAtLocalScreenExample.dart';
 import 'RazorPayExampleScreen.dart';
 import 'RowCircleItems.dart';
+import 'SliderExampleForCurreny.dart';
+import 'StoriesPostScreenExample.dart';
 import 'SyncfusionChartScreenExample.dart';
 import 'TwoEditTextSearchExampleScreen.dart';
 import 'controller/MainScreenController.dart';
@@ -54,7 +59,7 @@ class MyApp extends StatelessWidget {
       //   title: 'Razor Pay',
       // ),
       //home: jwt != null && jwt != '' ? HomeScreen() : LoginPage(),
-      home: PaginationAtLocalScreen(),
+      home: StoryViewExample(),
     );
   }
 }
