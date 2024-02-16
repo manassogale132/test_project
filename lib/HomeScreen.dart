@@ -392,8 +392,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(color: Colors.white),
                             ),
                             style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(),
-                              primary: Colors.red,
+                              shape: RoundedRectangleBorder(), backgroundColor: Colors.red,
                               textStyle: const TextStyle(
                                   color: Colors.red,
                                   fontSize: 20,

@@ -110,9 +110,7 @@ class ContainerWithBackground extends StatelessWidget {
                         // Button action here
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        primary: Colors.blue.shade700,
-                        onSurface: Colors.blue.shade700,
+                        padding: EdgeInsets.symmetric(horizontal: 16), backgroundColor: Colors.blue.shade700, disabledForegroundColor: Colors.blue.shade700.withOpacity(0.38), disabledBackgroundColor: Colors.blue.shade700.withOpacity(0.12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),

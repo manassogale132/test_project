@@ -97,12 +97,11 @@ class CustomDialogBox extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onPressed1,
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                    padding: EdgeInsets.symmetric(vertical: 12), backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                           8), // Adjust border radius as needed
-                    ),
-                    primary: Colors.blue, // Change background color as needed
+                    ), // Change background color as needed
                   ),
                   child: Text(
                     buttonText1,
@@ -120,12 +119,11 @@ class CustomDialogBox extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: onPressed2,
                   style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                    padding: EdgeInsets.symmetric(vertical: 12), backgroundColor: Colors.blue,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(
                           8), // Adjust border radius as needed
-                    ),
-                    primary: Colors.blue, // Change background color as needed
+                    ), // Change background color as needed
                   ),
                   child: Text(
                     buttonText2,

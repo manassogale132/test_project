@@ -68,8 +68,7 @@ class _SearchableListViewState extends State<SearchableListView> {
                                 child: ElevatedButton(
                                   onPressed: () {},
                                   style: ElevatedButton.styleFrom(
-                                    enableFeedback: false,
-                                    primary: Colors.white, // Background color
+                                    enableFeedback: false, backgroundColor: Colors.white, // Background color
                                     surfaceTintColor: Colors.white,
                                   ),
                                   child: !formattedStartDateSingle.isEmpty
@@ -162,7 +161,7 @@ class _SearchableListViewState extends State<SearchableListView> {
                               context); // Close the dialog without selecting the date
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.white, // Background color
+                          backgroundColor: Colors.white, // Background color
                           surfaceTintColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(40.0),

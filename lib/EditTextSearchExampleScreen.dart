@@ -86,6 +86,7 @@ class _EditTextSearchExampleScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
           leading: BackButton(color: Colors.white),
@@ -119,7 +120,8 @@ class _EditTextSearchExampleScreenState
                             Visibility(
                               visible: _focusNode.hasFocus,
                               child: Transform.translate(
-                                offset: Offset(0, 40),
+                                offset: Offset(0, 55),
+                                //offset: Offset(0, 40),
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: 20),
                                   height: 260,
@@ -128,6 +130,8 @@ class _EditTextSearchExampleScreenState
                                     borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(8.0),
                                       bottomRight: Radius.circular(8.0),
+                                      topRight: Radius.circular(8.0),
+                                      topLeft: Radius.circular(8.0),
                                     ),
                                     border: Border(
                                       bottom: BorderSide(
@@ -137,6 +141,9 @@ class _EditTextSearchExampleScreenState
                                           width: 1.5,
                                           color: Colors.grey.shade500),
                                       right: BorderSide(
+                                          width: 1.5,
+                                          color: Colors.grey.shade500),
+                                      top: BorderSide(
                                           width: 1.5,
                                           color: Colors.grey.shade500),
                                     ),
@@ -186,7 +193,9 @@ class _EditTextSearchExampleScreenState
                                                     child: Center(
                                                       child: CircleAvatar(
                                                         backgroundColor:
-                                                            Colors.black,
+                                                        _filteredProducts[
+                                                        index]
+                                                            .color,
                                                         child: Text(
                                                           _filteredProducts[
                                                                   index]

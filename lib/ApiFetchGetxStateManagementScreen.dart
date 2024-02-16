@@ -69,8 +69,7 @@ class ApiFetchGetxExample extends StatelessWidget {
                                 controller.fetchData();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.white, // Background color
-                                onPrimary: Colors.white, // Text color
+                                foregroundColor: Colors.white, backgroundColor: Colors.white, // Text color
                                 elevation: 2, // Shadow depth
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10), // Rounded corners
@@ -94,8 +93,7 @@ class ApiFetchGetxExample extends StatelessWidget {
                                 controller.clearData();
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: Colors.white, // Background color
-                                onPrimary: Colors.white, // Text color
+                                foregroundColor: Colors.white, backgroundColor: Colors.white, // Text color
                                 elevation: 2, // Shadow depth
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10), // Rounded corners
